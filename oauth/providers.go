@@ -1,7 +1,7 @@
 package oauth
 
 import (
-	"utils/oauth/models"
+	"github.com/pedrobarbosak/go-utils/oauth/models"
 
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/endpoints"

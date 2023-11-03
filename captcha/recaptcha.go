@@ -52,10 +52,9 @@ func (s *Recaptcha) post(ctx context.Context, response string) error {
 		return err
 	}
 
-	req.WithContext(ctx)
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 
-	resp, err := http.DefaultClient.Do(req)
+	resp, err := http.DefaultClient.Do(req.WithContext(ctx))
 	if err != nil {
 		return err
 	}

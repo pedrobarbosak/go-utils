@@ -1,14 +1,9 @@
-/*
-	@todo: fix underline fields need to be pointers as well because function is recursive
-	e.g. Slice2 []Struct2
-*/
-
 package main
 
 import (
 	"log"
 
-	"utils/defaults"
+	"github.com/pedrobarbosak/go-utils/defaults"
 )
 
 type MyStruct struct {

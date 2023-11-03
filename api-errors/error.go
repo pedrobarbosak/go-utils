@@ -3,7 +3,7 @@ package errors
 import (
 	goerrors "errors"
 
-	"utils/errors"
+	"github.com/pedrobarbosak/go-utils/errors"
 )
 
 type Error struct {
