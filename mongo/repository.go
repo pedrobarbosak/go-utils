@@ -180,10 +180,7 @@ func (repo *repository) Update(ctx context.Context, objectID string, object Stor
 		return err
 	}
 
-	object.SetID("")
-	err = repo.database.Collection(object.GetCollection()).FindOneAndUpdate(ctx, filter, bson.D{{Key: "$set", Value: object}}).Err()
-	object.SetID(objectID)
-	return err
+	return repo.database.Collection(object.GetCollection()).FindOneAndUpdate(ctx, filter, bson.D{{Key: "$set", Value: object}}).Err()
 }
 
 func (repo *repository) WithTransaction(ctx context.Context, fn func(sc context.Context) error) error {
