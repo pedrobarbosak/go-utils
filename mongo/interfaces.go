@@ -19,7 +19,7 @@ type Repository interface {
 
 	UpdateOne(ctx context.Context, object StorableObject, filter interface{}, update interface{}) (int64, error)
 
-	CreateMany(ctx context.Context, objs []StorableObject) error
+	CreateMany(ctx context.Context, obj StorableObject, data []interface{}) error
 	DeleteAll(ctx context.Context, object StorableObject) error
 
 	Preload(ctx context.Context, object any) error
