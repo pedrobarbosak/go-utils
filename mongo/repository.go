@@ -303,5 +303,9 @@ func (repo *repository) CreateIndexes(ctx context.Context, obj StorableObject, v
 	}
 
 	_, err := repo.database.Collection(obj.GetCollection()).Indexes().CreateMany(ctx, indexes)
+	if !mongo.IsDuplicateKeyError(err) {
+		return err
+	}
+
 	return err
 }
