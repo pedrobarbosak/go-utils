@@ -307,5 +307,5 @@ func (repo *repository) CreateIndexes(ctx context.Context, obj StorableObject, v
 		return err
 	}
 
-	return err
+	return nil
 }
