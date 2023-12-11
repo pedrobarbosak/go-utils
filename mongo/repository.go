@@ -283,3 +283,19 @@ func (repo *repository) DeleteAll(ctx context.Context, object StorableObject) er
 func (repo *repository) Disconnect(ctx context.Context) error {
 	return repo.client.Disconnect(ctx)
 }
+
+func (repo *repository) CreateMany(ctx context.Context, objs []StorableObject) error {
+	if len(objs) == 0 {
+		return nil
+	}
+
+	collection := objs[0].GetID()
+
+	data := make([]interface{}, 0, len(objs))
+	for _, obj := range objs {
+		data = append(data, obj)
+	}
+
+	_, err := repo.database.Collection(collection).InsertMany(ctx, data)
+	return err
+}
