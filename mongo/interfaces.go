@@ -22,7 +22,7 @@ type Repository interface {
 	CreateMany(ctx context.Context, obj StorableObject, data []interface{}) error
 	DeleteAll(ctx context.Context, object StorableObject) error
 
-	CreateIndexes(ctx context.Context, obj StorableObject, values map[string]int) error
+	CreateUniqueIndexes(ctx context.Context, obj StorableObject, values []map[string]int) error
 
 	Preload(ctx context.Context, object any) error
 	Disconnect(ctx context.Context) error

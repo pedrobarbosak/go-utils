@@ -293,13 +293,15 @@ func (repo *repository) CreateMany(ctx context.Context, obj StorableObject, data
 	return err
 }
 
-func (repo *repository) CreateIndexes(ctx context.Context, obj StorableObject, values map[string]int) error {
+func (repo *repository) CreateUniqueIndexes(ctx context.Context, obj StorableObject, values []map[string]int) error {
 	indexes := make([]mongo.IndexModel, 0, len(values))
-	for key, value := range values {
-		indexes = append(indexes, mongo.IndexModel{
-			Keys:    bson.D{{Key: key, Value: value}},
-			Options: options.Index().SetUnique(true),
-		})
+	for _, v := range values {
+		keys := bson.D{}
+		for key, value := range v {
+			keys = append(keys, bson.E{Key: key, Value: value})
+		}
+
+		indexes = append(indexes, mongo.IndexModel{Keys: keys, Options: options.Index().SetUnique(true)})
 	}
 
 	_, err := repo.database.Collection(obj.GetCollection()).Indexes().CreateMany(ctx, indexes)
