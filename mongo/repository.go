@@ -289,6 +289,6 @@ func (repo *repository) CreateMany(ctx context.Context, obj StorableObject, data
 		return nil
 	}
 
-	_, err := repo.database.Collection(obj.GetID()).InsertMany(ctx, data)
+	_, err := repo.database.Collection(obj.GetCollection()).InsertMany(ctx, data)
 	return err
 }
